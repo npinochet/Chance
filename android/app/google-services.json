@@ -1,0 +1,66 @@
+{
+  "project_info": {
+    "project_number": "608588877602",
+    "firebase_url": "https://fir-chance.firebaseio.com",
+    "project_id": "firebase-chance",
+    "storage_bucket": "firebase-chance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608588877602:android:cc01bb4499320715",
+        "android_client_info": {
+          "package_name": "com.chanceteam.chance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608588877602-kskf7627f349t8gcqei0tde935276svu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chanceteam.chance",
+            "certificate_hash": "02778f92189e50847983a8e71c8ba8d12c445a4b"
+          }
+        },
+        {
+          "client_id": "608588877602-7galfvgf1mee9lgl5c088qh5t4sr6brs.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "608588877602-1n013bojblpclm16ud9en99ho24ustga.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chanceteam.chance",
+            "certificate_hash": "7aab86b35fe36048936f74db902f0ea802c1ad8d"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfdJ01WxxdpRlzLqRkDDfmrWbF8bVx3d8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-50753116-2"
+          }
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608588877602-7galfvgf1mee9lgl5c088qh5t4sr6brs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
