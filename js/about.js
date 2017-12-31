@@ -125,9 +125,11 @@ class AboutScreen extends Component {
 
 	render() {
 		return (
+
+			<View style={{flex:1,backgroundColor: '#FFFFFF'}}>
 			<ScrollView>
 				<View style={styles.container}>
-
+				
 					<Image 
 						resizeMode={"contain"}
 						style={{width: 180, alignSelf: "center", marginTop: 18,}}
@@ -161,13 +163,15 @@ class AboutScreen extends Component {
 						</Button>
 					}
 
-					<Text>
+					<Text style={{textAlign:"center"}}>
 						<Icon name="copyright"/> Chance Team
 					</Text>
-					
-				</View>
 
+				
+				</View>
 			</ScrollView>
+			</View>
+		
 		);
 	};
 };

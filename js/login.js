@@ -9,6 +9,7 @@ import {
 	ToastAndroid,
 	Image,
 	TouchableOpacity,
+	ScrollView,
 } from 'react-native';
 
 import Button from 'react-native-button';
@@ -201,10 +202,12 @@ class LoginScreen extends Component{
 	render() {
 		if (this.state.loaded){
 			return (
+
 				<View style={styles.container}>
 
 					<Spinner overlayColor="rgba(0, 0, 0, 0.7)" size={60} visible={this.state.spinnerVisible} textContent={this.strings.spinnerText} textStyle={{color: '#FFF', textAlign: 'center'}}/>
 
+					<ScrollView>
 					<Image 
 						style={{width: 120, height: 120, alignSelf: "center", margin: 30,}}
 						source={require("../assets/logo.png")} />
@@ -220,6 +223,8 @@ class LoginScreen extends Component{
 							{this.strings.bulletPoints}
 						</Text>
 					</View>
+					
+					</ScrollView>
 
 					<View style={styles.bottom}>
 

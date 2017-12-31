@@ -5,6 +5,7 @@ import {
 	Text,
 	View,
 	TouchableOpacity,
+	ScrollView,
 } from 'react-native';
 
 import Hr from 'react-native-hr';
@@ -116,35 +117,40 @@ class HomeScreen extends Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
-				<Text style={styles.chanceText}>
-					Chance x{this.state.chance}
-				</Text>
-				<Text style={styles.chanceSubText}>
-					{this.strings.subText}
-				</Text>
-				<Hr lineStyle={{backgroundColor:"#AAAAAA",marginHorizontal:10}} />
 
-				<Text style={styles.jackpotText}>
-					{this.strings.jackpotText}
-				</Text>
+			<View style={{flex:1,backgroundColor: '#FFFFFF'}}>
+			<ScrollView>
+				<View style={styles.container}>
+					<Text style={styles.chanceText}>
+						Chance x{this.state.chance}
+					</Text>
+					<Text style={styles.chanceSubText}>
+						{this.strings.subText}
+					</Text>
+					<Hr lineStyle={{backgroundColor:"#AAAAAA",marginHorizontal:10}} />
 
-				{/*animated={false}*/}
-				<Circle textStyle={{fontWeight:"bold"}} color={"#F8A42F"} borderWidth={5} size={150} thickness={15} progress={this.state.progress} showsText={true} formatText={p => {return '$'+this.toLocaleString(this.state.jackpot/100)}} />
+					<Text style={styles.jackpotText}>
+						{this.strings.jackpotText}
+					</Text>
 
-				<Text style={styles.jackpotValue}>
-					{this.strings.subJackpot1} <Text style={{fontSize: 20, fontWeight: "bold", color: "#F8A42F"}}>%{Math.floor(this.state.progress*100)}</Text> {this.strings.subJackpot2} <Text style={{fontSize: 20, fontWeight: "bold"}}>${this.toLocaleString(this.resultLimit/100)}</Text>
-				</Text>
+					{/*animated={false}*/}
+					<Circle textStyle={{fontWeight:"bold"}} color={"#F8A42F"} borderWidth={5} size={150} thickness={15} progress={this.state.progress} showsText={true} formatText={p => {return '$'+this.toLocaleString(this.state.jackpot/100)}} />
 
-				<Text style={{fontSize:15, marginTop:10}}>
-					{this.strings.lastWinnerText}
-				</Text>
-				<Text style={{fontWeight:"bold", fontSize:19}}>
-					{this.lastWinner}
-				</Text>
+					<Text style={styles.jackpotValue}>
+						{this.strings.subJackpot1} <Text style={{fontSize: 20, fontWeight: "bold", color: "#F8A42F"}}>%{Math.floor(this.state.progress*100)}</Text> {this.strings.subJackpot2} <Text style={{fontSize: 20, fontWeight: "bold"}}>${this.toLocaleString(this.resultLimit/100)}</Text>
+					</Text>
 
-				<ActionButton icon={<Icon size={40} color="#FFFFFF" name="ticket"/>} buttonColor="#F8A42F" onPress={() => {this.toPay()}}/>
+					<Text style={{fontSize:15, marginTop:10}}>
+						{this.strings.lastWinnerText}
+					</Text>
+					<Text style={{fontWeight:"bold", fontSize:19}}>
+						{this.lastWinner}
+					</Text>
 
+				</View>
+			</ScrollView>
+
+			<ActionButton icon={<Icon size={40} color="#FFFFFF" name="ticket"/>} buttonColor="#F8A42F" onPress={() => {this.toPay()}}/>
 			</View>
 		);
 	};
