@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, { Component } from 'react';
 import {
@@ -22,6 +17,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {GoogleSignin} from 'react-native-google-signin';
 import {NavigationActions} from 'react-navigation';
 import LocalizedStrings from 'react-native-localization';
+import RNFS from 'react-native-fs';
 
 import client_call from "./client";
 
@@ -33,18 +29,22 @@ class LoginScreen extends Component{
 			errorAlertTitle: "An error ocurred while conecction with your user.",
 			silentLoginToastText:"Logged in successfully",
 			spinnerText: "Establishing connection with the server...",
-			mainText: "Your chance to earn money the easiest way possible",
+			mainText: "Earn money the easiest way possible",
 			start: "Start",
-			about: "About Us",
+			bulletPoints: "• See ads \n\n• Increase your chances \n\n• Wait for the jackpot goal \n\n• Win the raffle \n",
+			termsText: "By participating, you agree to our",
+			termsButton: "Terms & Conditions.",
 		},
 		"es":{
 			networkAlertTitle: "Ocurrio un problema conectandose con la red. Compruebe su conexión a internet y vuelva a intentarlo.",
 			errorAlertTitle: "Ocurrio un problema conectandose con su usuario.",
 			silentLoginToastText:"Inicio de sesión exitosa",
 			spinnerText: "Estableciendo conexión con el servidor...",
-			mainText: "Tenga la oportunidad de ganar dinero de la manera más fácil",
+			mainText: "Ganar dinero de la manera más fácil",
 			start: "Comenzar",
-			about: "Acerca de Nosotros",
+			bulletPoints: "• Ve anuncios \n\n• Aumenta tus posibilidades \n\n• Espera la meta del jackpot \n\n• Gana el sorteo \n",
+			termsText: "Al participar, usted acepta nuestros",
+			termsButton: "Terminos y Condiciones.",
 		},
 	});
 
@@ -68,6 +68,16 @@ class LoginScreen extends Component{
 		{cancelable: false},
 	];
 
+	termsAlert = (msg) => {
+		return [
+			this.strings.termsButton.slice(0, -1),
+			msg,
+			[
+				{text:"Ok"},
+			],
+		];
+	};
+
 	silentLoginToast = [this.strings.silentLoginToastText, ToastAndroid.SHORT];
 
 	static navigationOptions = {
@@ -90,7 +100,6 @@ class LoginScreen extends Component{
 				this.state.loaded = true;
 			};
 		};
-
 	};
 
 	componentDidMount(){
@@ -98,7 +107,6 @@ class LoginScreen extends Component{
 		GoogleSignin.hasPlayServices({ autoResolve: true }).then(() => {
 
 			GoogleSignin.configure({
-				//iosClientId: <FROM DEVELOPER CONSOLE>, // only for iOS
 				webClientId: "608588877602-7galfvgf1mee9lgl5c088qh5t4sr6brs.apps.googleusercontent.com",
 			}).then(() => {
 				// you can now call currentUserAsync()
@@ -147,11 +155,15 @@ class LoginScreen extends Component{
 				prevState.spinnerVisible = false;
 				return prevState;
 			});
+
+			/*if (data.new){ // new users
+			}else{
+			};*/
+
 			console.log("login Successfull");
 			ToastAndroid.show(this.silentLoginToast[0], this.silentLoginToast[1]);
 
 			//cambiar pagina
-
 			const resetAction = NavigationActions.reset({
 				index: 0,
 				actions: [
@@ -180,6 +192,12 @@ class LoginScreen extends Component{
 
 	};
 
+	showTermsAlert(){
+		RNFS.readFileAssets("TERMS AND CONDITIONS").then((res) => {
+			Alert.alert.apply({}, this.termsAlert(res))
+		});
+	};
+
 	render() {
 		if (this.state.loaded){
 			return (
@@ -197,15 +215,26 @@ class LoginScreen extends Component{
 						{this.strings.mainText}
 					</Text>
 
+					<View style={{flexDirection: 'row', justifyContent: 'center', margin:10}}>
+						<Text style={styles.instList}>
+							{this.strings.bulletPoints}
+						</Text>
+					</View>
+
 					<View style={styles.bottom}>
 
 						<Button style={styles.loginButton} onPress={() => this.loginPress()} containerStyle={styles.loginButtonContainer}>
 							{this.strings.start}
 						</Button>
 
-						<TouchableOpacity onPress={() => this.props.navigation.navigate("About")}>
-							<Text style={styles.footer}>{this.strings.about}</Text>
-						</TouchableOpacity>
+						<View style={styles.termsView}>
+							<Text style={{textAlign:"center"}}>
+								{this.strings.termsText}
+							</Text>
+							<TouchableOpacity onPress={() => this.showTermsAlert()}>
+								<Text style={styles.termsButton}>{this.strings.termsButton}</Text>
+							</TouchableOpacity>
+						</View>
 
 					</View>
 				</View>
@@ -225,9 +254,16 @@ const styles = StyleSheet.create({
 	},
 	main:{
 		fontWeight: "bold",
-		fontSize: 30,
+		fontSize: 23,
 		textAlign: 'center',
-		margin: 30,
+		margin: 40,
+		marginTop: 18,
+		marginBottom: 13,
+	},
+	instList: {
+		textAlign: "justify",
+		fontSize: 18,
+		lineHeight: 15,
 	},
 	title: {
 		fontSize: 40,
@@ -256,16 +292,18 @@ const styles = StyleSheet.create({
 		right:0,
 		left:0,
 		padding:10,
-		borderRadius:30,
+		borderRadius:15,
 		backgroundColor: '#F7931E',
 	},
-	footer:{
-		fontSize: 17,
-		textAlign: 'center',
-		marginTop: 20,
-		color: "#F8A42F"
+	termsView: {
+		marginTop:3,
 	},
-
+	termsButton: {
+		textAlign:"center", 
+		fontWeight:"bold", 
+		color: "#F8A42F", 
+		fontSize:16,
+	},
 });
 
 module.exports = LoginScreen;

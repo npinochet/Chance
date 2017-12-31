@@ -10,7 +10,7 @@ import {
 import Hr from 'react-native-hr';
 import ActionButton from 'react-native-action-button';
 import {Circle} from 'react-native-progress';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import LocalizedStrings from 'react-native-localization';
 
 import client_call from "./client";
@@ -27,7 +27,7 @@ class HomeScreen extends Component {
 		},
 		"es":{
 			subText: "Entre más chance más oportunidad tienes de ganar.",
-			//subText: "Entre más chance más estas más cerca de ganar.",
+			//subText: "Entre más chance más cerca estas de ganar.",
 			jackpotText: "Jackpot",
 			subJackpot1: "Un",
 			subJackpot2: "de la meta de",
@@ -41,7 +41,7 @@ class HomeScreen extends Component {
 			headerStyle: {backgroundColor:"#F8A42F"},
 			headerTintColor: "#FFFFFF",
 			headerRight: (<TouchableOpacity onPress={() => navigation.navigate("About",{"user": true})}>
-							<View style={{margin:12}}><Icon size={28} color="#FFFFFF" name="info"/></View>
+							<View style={{margin:12}}><Icon size={28} color="#FFFFFF" name="information"/></View>
 						</TouchableOpacity>),
 		};
 	};
@@ -143,7 +143,7 @@ class HomeScreen extends Component {
 					{this.lastWinner}
 				</Text>
 
-				<ActionButton icon={<Icon size={40} color="#FFFFFF" name="star"/>} buttonColor="#F8A42F" onPress={() => {this.toPay()}}/>
+				<ActionButton icon={<Icon size={40} color="#FFFFFF" name="ticket"/>} buttonColor="#F8A42F" onPress={() => {this.toPay()}}/>
 
 			</View>
 		);

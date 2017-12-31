@@ -267,14 +267,32 @@ class PayScreen extends Component {
 
 		up = () => {
 			let t = this.parseTime(this.lastAdMili);
-			this.items[0].adText = (t.hours)+"h "+(t.minutes%60)+"m "+(t.seconds%60)+"s";
+
+			let timeText = (t.seconds%60)+"s";
+			if (t.minutes%60 != 0){
+				timeText = (t.minutes%60)+"m "+timeText;
+			};
+			if (t.hours != 0){
+				timeText = (t.hours)+"h "+timeText;
+			};
+
+			this.items[0].adText = timeText;
 			this.setState((prevState) => {return {waitAd: true}});
 			
 			this.lastAdTimer = setInterval(()=>{
 				this.lastAdMili = this.lastAdMili - 1000;
 
 				let t = this.parseTime(this.lastAdMili);
-				this.items[0].adText = (t.hours)+"h "+(t.minutes%60)+"m "+(t.seconds%60)+"s";
+
+				let timeText = (t.seconds%60)+"s";
+				if (t.minutes%60 != 0){
+					timeText = (t.minutes%60)+"m "+timeText;
+				};
+				if (t.hours != 0){
+					timeText = (t.hours)+"h "+timeText;
+				};
+
+				this.items[0].adText = timeText;
 				this.setState((prevState) => {return {waitAd: true}});
 
 				if (this.adHours <= 0){
